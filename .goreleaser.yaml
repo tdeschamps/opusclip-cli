@@ -1,0 +1,80 @@
+version: 2
+
+project_name: opusclip
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: opusclip
+    main: ./cmd/opusclip
+    binary: opusclip
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w
+      - -X github.com/tdeschamps/opusclip-cli/internal/cmd/version.Version={{.Version}}
+      - -X github.com/tdeschamps/opusclip-cli/internal/cmd/version.Commit={{.ShortCommit}}
+      - -X github.com/tdeschamps/opusclip-cli/internal/cmd/version.Date={{.Date}}
+    goos: [darwin, linux, windows]
+    goarch: [amd64, arm64]
+    ignore:
+      - goos: windows
+        goarch: arm64
+
+archives:
+  - formats: [tar.gz]
+    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+
+checksum:
+  name_template: "checksums.txt"
+
+sboms:
+  - artifacts: archive
+
+changelog:
+  use: github
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+
+# Homebrew publishes a cask to a separate tap repo, which needs a PAT (the
+# built-in GITHUB_TOKEN can't write cross-repo). Requires:
+#   - the tap repo tdeschamps/homebrew-tap to exist, and
+#   - a HOMEBREW_TAP_GITHUB_TOKEN secret (fine-grained PAT, Contents: read/write
+#     on that tap), passed to goreleaser in release.yml.
+# Users then install with: brew install tdeschamps/tap/opusclip
+# (homebrew_casks is the current key; the old `brews:` is deprecated.)
+homebrew_casks:
+  - repository:
+      owner: tdeschamps
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    homepage: "https://github.com/tdeschamps/opusclip-cli"
+    description: "Turn long videos into short clips from the command line"
+
+# Scoop (Windows) and Docker remain disabled until their bucket repo / GHCR
+# namespace are set up. To enable:
+#   - Scoop: create a scoop bucket repo, set owner/name + a token.
+#   - Docker: point image_templates at ghcr.io/<repo-owner>/... so the built-in
+#     GITHUB_TOKEN can push, and add a GHCR login step in release.yml.
+#
+# scoops:
+#   - repository:
+#       owner: tdeschamps
+#       name: scoop-bucket
+#     homepage: "https://github.com/tdeschamps/opusclip-cli"
+#     description: "Turn long videos into short clips from the command line"
+#
+# dockers:
+#   - image_templates:
+#       - "ghcr.io/tdeschamps/opusclip-cli:{{ .Version }}"
+#       - "ghcr.io/tdeschamps/opusclip-cli:latest"
+#     dockerfile: Dockerfile

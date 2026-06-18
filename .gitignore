@@ -1,0 +1,10 @@
+/dist/
+/opusclip
+*.out
+*.test
+.idea/
+.vscode/
+.claude/
+
+# Local build output
+/bin/
