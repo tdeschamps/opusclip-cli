@@ -4,7 +4,10 @@
 *.test
 .idea/
 .vscode/
-.claude/
+
+# Track the shareable Claude Code skill (the plugin manifest points at it) but
+# never the machine-local permission allowlist.
+.claude/settings.local.json
 
 # Local build output
 /bin/
