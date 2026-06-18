@@ -15,6 +15,7 @@ import (
 	"github.com/tdeschamps/opusclip-cli/internal/cmd/version"
 	"github.com/tdeschamps/opusclip-cli/internal/cmdutil"
 	"github.com/tdeschamps/opusclip-cli/internal/config"
+	"github.com/tdeschamps/opusclip-cli/internal/help"
 	"github.com/tdeschamps/opusclip-cli/internal/iostreams"
 )
 
@@ -116,7 +117,7 @@ func probe(ctx context.Context, f *cmdutil.Factory) (rest bool) {
 
 func renderHuman(io *iostreams.IOStreams, d data) {
 	out := io.Out
-	fmt.Fprintln(out, io.Bold("opusclip"), io.Gray(d.Version))
+	help.RenderBanner(io, d.Version)
 	fmt.Fprintln(out)
 
 	// Pad the label to a fixed width *before* colorizing so the ANSI escape

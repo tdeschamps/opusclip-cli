@@ -23,6 +23,7 @@ import (
 	"github.com/tdeschamps/opusclip-cli/internal/cmd/update"
 	"github.com/tdeschamps/opusclip-cli/internal/cmd/version"
 	"github.com/tdeschamps/opusclip-cli/internal/cmdutil"
+	"github.com/tdeschamps/opusclip-cli/internal/help"
 	"github.com/tdeschamps/opusclip-cli/internal/updatecheck"
 )
 
@@ -45,6 +46,13 @@ See 'opusclip <command> --help' for details on any command.`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if showVersion {
 				cmd.Println(version.String())
+				return nil
+			}
+			// A bare `opusclip` on a terminal shows the branded landing screen;
+			// piped (or with --help parsers) it falls back to cobra's help so
+			// machine consumers and `--help` stay standard.
+			if f.IOStreams.IsStdoutTTY() {
+				help.OpusClip(version.Version).Render(f.IOStreams)
 				return nil
 			}
 			return cmd.Help()

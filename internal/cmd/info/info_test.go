@@ -63,7 +63,7 @@ func TestInfoHumanBanner(t *testing.T) {
 		t.Fatal(err)
 	}
 	s := out.String()
-	for _, want := range []string{"opusclip", "Version", "Profile", "acme-eu", "Auth", "Docs"} {
+	for _, want := range []string{"█", "Version", "Profile", "acme-eu", "Auth", "Docs"} {
 		if !strings.Contains(s, want) {
 			t.Errorf("human banner missing %q:\n%s", want, s)
 		}
