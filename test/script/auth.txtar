@@ -1,0 +1,12 @@
+# Logging in with a token from stdin validates against the API and stores the credential.
+stdin key.txt
+exec opusclip auth login --with-token
+stderr 'Logged in'
+
+# auth status shows a masked fingerprint, never the raw key.
+exec opusclip auth status
+stdout 'Method:'
+! stdout 'supersecretkey'
+
+-- key.txt --
+supersecretkey1234

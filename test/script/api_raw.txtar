@@ -1,0 +1,7 @@
+# The raw escape hatch makes an authenticated request and prints JSON.
+exec opusclip api GET /api/clip-projects/P1
+stdout '"projectId"'
+
+# Shorthand path form defaults to GET.
+exec opusclip api /api/clip-projects/P1
+stdout 'P1'

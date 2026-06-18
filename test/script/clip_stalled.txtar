@@ -1,0 +1,3 @@
+# Watching a stalled project exits non-zero and reports the stall error.
+! exec opusclip clip watch STALLED --interval 1ms
+stderr 'stalled'

@@ -1,0 +1,19 @@
+# Create a project from a URL; JSON output carries the projectId.
+exec opusclip clip create --url https://youtu.be/x --json
+stdout '"projectId": "P1"'
+
+# Get the project by id.
+exec opusclip clip get P1 --json
+stdout 'P1'
+
+# Watch polls the stage stepper to COMPLETE (fast interval for tests).
+exec opusclip clip watch P1 --interval 1ms
+stderr 'ready'
+
+# List the generated clips as JSON.
+exec opusclip clips list --project P1 --json
+stdout 'Best Moment'
+
+# Download writes an mp4 into the output dir.
+exec opusclip clips download --project P1 --out out
+exists out/Best-Moment.mp4

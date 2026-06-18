@@ -1,0 +1,13 @@
+# version prints a recognizable line.
+exec opusclip version
+stdout '^opusclip '
+
+# --help lists the core command groups and commands.
+exec opusclip --help
+stdout 'Core commands:'
+stdout 'clip'
+stdout 'clips'
+
+# bad output format is a usage error.
+! exec opusclip clips list --project P1 -o bogus
+stderr 'unknown output format'
