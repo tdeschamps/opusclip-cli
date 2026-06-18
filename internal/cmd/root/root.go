@@ -10,6 +10,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	authcmd "github.com/tdeschamps/opusclip-cli/internal/cmd/auth"
 	"github.com/tdeschamps/opusclip-cli/internal/cmd/completion"
 	configcmd "github.com/tdeschamps/opusclip-cli/internal/cmd/config"
 	"github.com/tdeschamps/opusclip-cli/internal/cmd/docs"
@@ -92,6 +93,7 @@ See 'opusclip <command> --help' for details on any command.`,
 	)
 
 	cmd.AddCommand(
+		authcmd.NewCmdAuth(f),
 		configcmd.NewCmdConfig(f),
 		profiles.NewCmdProfiles(f),
 		doctor.NewCmdDoctor(f),
