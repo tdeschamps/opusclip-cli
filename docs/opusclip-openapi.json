@@ -1,0 +1,3348 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/brand-templates": {
+      "get": {
+        "operationId": "BrandTemplateController_getTemplates",
+        "parameters": [
+          {
+            "name": "q",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "mine"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BrandTemplateRepresentation"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "brand-templates",
+          "enterprise"
+        ]
+      }
+    },
+    "/api/clip-projects": {
+      "post": {
+        "operationId": "ClipProjectController_createClipProject",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateClipProjectCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClipProjectRepresentation"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "clip-project",
+          "enterprise"
+        ]
+      }
+    },
+    "/api/clip-projects/{projectId}": {
+      "get": {
+        "operationId": "ClipProjectController_getClipProjectDetail",
+        "parameters": [
+          {
+            "name": "projectId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClipProjectRepresentation"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "clip-project",
+          "enterprise"
+        ]
+      }
+    },
+    "/api/clip-projects/{projectId}/update-visibility": {
+      "post": {
+        "operationId": "ClipProjectController_updateClipProjectVisibility",
+        "parameters": [
+          {
+            "name": "projectId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProjectVisibilityCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClipProjectRepresentation"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "clip-project",
+          "enterprise"
+        ]
+      }
+    },
+    "/api/exportable-clips": {
+      "get": {
+        "operationId": "ExportableClipController_queryExportableClips",
+        "parameters": [
+          {
+            "name": "x-opus-org-id",
+            "required": false,
+            "in": "header",
+            "description": "Organization ID. Required for users with multiple organizations.",
+            "schema": {
+              "example": "org_Example00000001",
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "required": true,
+            "in": "query",
+            "description": "Query type",
+            "schema": {
+              "example": "findByProjectId",
+              "enum": [
+                "findByCollectionId",
+                "findByProjectId"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "required": false,
+            "in": "query",
+            "description": "Project ID, required when q=findByProjectId",
+            "schema": {
+              "example": "P0000000demo",
+              "type": "string"
+            }
+          },
+          {
+            "name": "collectionId",
+            "required": false,
+            "in": "query",
+            "description": "Collection ID, required when q=findByCollectionId",
+            "schema": {
+              "example": "xmAwhhFi0IJt",
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNum",
+            "required": false,
+            "in": "query",
+            "description": "Page Num, started with 1",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "description": "Page Size",
+            "schema": {
+              "example": 10,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved exportable clips",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExportableClipRepresentation"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "ExportableClip",
+          "exportable-clips",
+          "enterprise"
+        ]
+      }
+    },
+    "/api/collection-contents/delete-collection-contents": {
+      "post": {
+        "operationId": "CollectionContentController_deleteCollectionContents",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteCollectionContentCmd"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "string",
+                          "description": "Show action execute status",
+                          "nullable": false,
+                          "example": "success"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "collection-content",
+          "enterprise"
+        ]
+      }
+    },
+    "/api/collection-contents": {
+      "post": {
+        "operationId": "CollectionContentController_createCollectionContent",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCollectionContentCmd"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SuccessResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/CollectionContentDto"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "collection-content",
+          "enterprise"
+        ]
+      }
+    },
+    "/api/collections/{collectionId}": {
+      "delete": {
+        "operationId": "CollectionController_delete",
+        "parameters": [
+          {
+            "name": "collectionId",
+            "required": true,
+            "in": "path",
+            "description": "The unique collection ID of the collection that you want to delete.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "string",
+                          "description": "ID of collection deleted successfully",
+                          "nullable": false,
+                          "example": "xmAwhhFi0IJt"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "collection",
+          "enterprise"
+        ]
+      }
+    },
+    "/api/collections": {
+      "post": {
+        "operationId": "CollectionController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCollectionCmd"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SuccessResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/CollectionDto"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errorName": {
+                      "type": "string",
+                      "nullable": false,
+                      "enum": [
+                        "QuotaExceed"
+                      ]
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "collection",
+          "enterprise"
+        ]
+      },
+      "get": {
+        "operationId": "CollectionController_list",
+        "parameters": [
+          {
+            "name": "q",
+            "required": true,
+            "in": "query",
+            "description": "**Query type**\n `q = mine` means list collections of your account.\n `q = findByContentId` means list collections contained the specific content(clip).",
+            "schema": {
+              "example": "mine",
+              "enum": [
+                "findByContentId",
+                "mine"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "contentId",
+            "required": false,
+            "in": "query",
+            "description": "If specified, will only return collections that contain the clip with this contentID.",
+            "schema": {
+              "example": "P0000000demo.CUexample2",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SuccessResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "properties": {
+                            "list": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/CollectionDto"
+                              },
+                              "description": "The list of collections"
+                            },
+                            "total": {
+                              "type": "number",
+                              "nullable": false,
+                              "description": "Total number of valid items"
+                            },
+                            "next": {
+                              "oneOf": [
+                                {
+                                  "type": "string",
+                                  "nullable": true,
+                                  "description": "Next page cursor"
+                                },
+                                {
+                                  "type": "number",
+                                  "nullable": true,
+                                  "description": "Next page cursor"
+                                }
+                              ]
+                            },
+                            "limit": {
+                              "type": "number",
+                              "nullable": true,
+                              "description": "Limit number in this paged query"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "errorName": {
+                      "type": "string",
+                      "nullable": false,
+                      "enum": [
+                        "Bad Request"
+                      ]
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "collection",
+          "enterprise"
+        ]
+      }
+    },
+    "/api/collections/{collectionId}/export": {
+      "post": {
+        "operationId": "CollectionController_export",
+        "parameters": [
+          {
+            "name": "collectionId",
+            "required": true,
+            "in": "path",
+            "description": "The collectionID of the collection that you want to export",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmptyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SuccessResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/CollectionExportedDto"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "collection",
+          "enterprise"
+        ]
+      }
+    },
+    "/api/censor-jobs": {
+      "post": {
+        "operationId": "CensorJobController_createCensorJob",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CensorJobRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CensorJobResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "censor-jobs",
+          "enterprise"
+        ]
+      }
+    },
+    "/api/censor-jobs/{jobId}": {
+      "get": {
+        "operationId": "CensorJobController_getCensorJob",
+        "parameters": [
+          {
+            "name": "jobId",
+            "required": true,
+            "in": "path",
+            "description": "The jobId that you want to get the status of.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CensorJobStatusResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "censor-jobs",
+          "enterprise"
+        ]
+      }
+    },
+    "/api/social-accounts": {
+      "get": {
+        "operationId": "SocialAccountController_getSocialAccounts",
+        "description": "Retrieve the connected social destinations available for social posting.",
+        "parameters": [
+          {
+            "name": "q",
+            "required": true,
+            "in": "query",
+            "description": "Query type",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "mine"
+              ],
+              "example": "mine"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved social accounts",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": [
+                    {
+                      "postAccountId": "postAccountId_xxx1",
+                      "subAccountId": "subAccountId_xxx1",
+                      "platform": "FACEBOOK_PAGE",
+                      "extUserId": "extUserId_xxx",
+                      "extUserName": "Page Name",
+                      "extUserPictureLink": "https://example.com/avatar.png",
+                      "extUserProfileLink": "https://www.facebook.com/page_id"
+                    },
+                    {
+                      "postAccountId": "postAccountId_xxx2",
+                      "platform": "TIKTOK_BUSINESS",
+                      "extUserId": "extUserId_xxx",
+                      "extUserName": "tiktok_account",
+                      "extUserPictureLink": "https://example.com/avatar.jpeg",
+                      "extUserProfileLink": "https://www.tiktok.com/@username"
+                    }
+                  ]
+                },
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "postAccountId",
+                          "platform",
+                          "extUserId",
+                          "extUserName"
+                        ],
+                        "properties": {
+                          "postAccountId": {
+                            "type": "string",
+                            "description": "Unique ID of the connected social account record"
+                          },
+                          "subAccountId": {
+                            "type": "string",
+                            "description": "Sub-account ID for Facebook pages, Instagram business accounts, or LinkedIn person or org URNs"
+                          },
+                          "platform": {
+                            "type": "string",
+                            "enum": [
+                              "YOUTUBE",
+                              "TIKTOK_BUSINESS",
+                              "FACEBOOK_PAGE",
+                              "INSTAGRAM_BUSINESS",
+                              "LINKEDIN",
+                              "TWITTER"
+                            ]
+                          },
+                          "extUserId": {
+                            "type": "string",
+                            "description": "Platform-side user or account ID"
+                          },
+                          "extUserName": {
+                            "type": "string",
+                            "description": "Display name from the third-party platform"
+                          },
+                          "extUserPictureLink": {
+                            "type": "string",
+                            "description": "Avatar image URL"
+                          },
+                          "extUserProfileLink": {
+                            "type": "string",
+                            "description": "Public channel or profile URL"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "social-posting",
+          "enterprise"
+        ]
+      }
+    },
+    "/api/social-copy-jobs": {
+      "post": {
+        "operationId": "SocialCopyJobController_createSocialCopyJob",
+        "description": "Create an asynchronous social copy generation job for a specific clip and destination account.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "projectId": "P0000000demo",
+                "clipId": "CUexample1",
+                "postAccountId": "postAccountId_xxx1",
+                "subAccountId": "subAccountId_xxx1",
+                "prompt": "Write the caption in a playful, witty tone that uses humor to keep the audience engaged, while ending with a clear call to action.",
+                "forceRegenerate": false
+              },
+              "schema": {
+                "type": "object",
+                "required": [
+                  "projectId",
+                  "clipId",
+                  "postAccountId",
+                  "subAccountId"
+                ],
+                "properties": {
+                  "projectId": {
+                    "type": "string",
+                    "description": "Project ID"
+                  },
+                  "clipId": {
+                    "type": "string",
+                    "description": "Bare clip ID (e.g. `CUexample1`). **Not** the composite `{projectId}.{clipId}` form returned as `id` by `GET /api/exportable-clips` — pass only the part after the dot."
+                  },
+                  "postAccountId": {
+                    "type": "string",
+                    "description": "Unique ID of the connected social account record"
+                  },
+                  "subAccountId": {
+                    "type": "string",
+                    "description": "Sub-account ID used by Facebook pages, Instagram business accounts, or LinkedIn"
+                  },
+                  "prompt": {
+                    "type": "string",
+                    "description": "Custom style or tone instruction for generation"
+                  },
+                  "forceRegenerate": {
+                    "type": "boolean",
+                    "description": "Whether to bypass the cached result and regenerate"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully created a social copy generation job",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "jobId": "96e3d68c-49ef-4c19-b3b6-595f9564537c"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "jobId"
+                      ],
+                      "properties": {
+                        "jobId": {
+                          "type": "string",
+                          "description": "Unique ID of the social copy generation job"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "social-posting",
+          "enterprise"
+        ]
+      }
+    },
+    "/api/social-copy-jobs/{jobId}": {
+      "get": {
+        "operationId": "SocialCopyJobController_getSocialCopyJob",
+        "description": "Get the current status and generated copy for a social copy generation job.",
+        "parameters": [
+          {
+            "name": "jobId",
+            "required": true,
+            "in": "path",
+            "description": "Unique ID of the social copy generation job",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the social copy generation result",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "jobId": "96e3d68c-49ef-4c19-b3b6-595f9564537c",
+                    "status": "COMPLETED",
+                    "cached": false,
+                    "title": "My Daughter's 'Gift' at 3 AM",
+                    "description": "Thought I was losing my mind. Hear walking at 3 AM, check the house - everyone's asleep. Then I see it... my daughter's 'gift' moved. My wife has some explaining to do!",
+                    "hashtags": "#ParentingFails #CreepyKids #MomLife #FunnyParenting #WhatDidISignUpFor"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "jobId",
+                        "status"
+                      ],
+                      "properties": {
+                        "jobId": {
+                          "type": "string",
+                          "description": "Unique ID of the social copy generation job"
+                        },
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "RUNNING",
+                            "COMPLETED",
+                            "FAILED"
+                          ],
+                          "description": "Status of the social copy generation job"
+                        },
+                        "cached": {
+                          "type": "boolean",
+                          "description": "Whether the result came from cache"
+                        },
+                        "title": {
+                          "type": "string",
+                          "description": "Generated title"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Generated description"
+                        },
+                        "hashtags": {
+                          "type": "string",
+                          "description": "Generated hashtags"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "social-posting",
+          "enterprise"
+        ]
+      }
+    },
+    "/api/post-tasks": {
+      "post": {
+        "operationId": "PostTaskController_createPostTask",
+        "description": "Publish a clip immediately to a connected social account. Each X (formerly Twitter) post costs 1 credit.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "projectId": "P0000000demo",
+                "clipId": "qU3iVMSO77",
+                "postAccountId": "postAccountId_xxx1",
+                "subAccountId": "subAccountId_xxx1",
+                "postDetail": {
+                  "title": "My Daughter's Creepy 3 AM Visitor",
+                  "custom": {
+                    "description": "Okay, so my daughter got a doll that can apparently move on its own. Last night at 3 AM, I heard footsteps, went to check, and this thing had moved! Totally thought I was losing my mind. Anyone else's toys play tricks? #CreepyDoll #HauntedHouse #MomLife #ParentingFails #ScaryStories",
+                    "privacy": "public"
+                  },
+                  "mediaType": "video"
+                }
+              },
+              "schema": {
+                "type": "object",
+                "required": [
+                  "projectId",
+                  "clipId",
+                  "postAccountId",
+                  "postDetail"
+                ],
+                "properties": {
+                  "projectId": {
+                    "type": "string",
+                    "description": "Project ID"
+                  },
+                  "clipId": {
+                    "type": "string",
+                    "description": "Bare clip ID (e.g. `qU3iVMSO77`). **Not** the composite `{projectId}.{clipId}` form returned as `id` by `GET /api/exportable-clips` — pass only the part after the dot."
+                  },
+                  "postAccountId": {
+                    "type": "string",
+                    "description": "Unique ID of the connected social account record"
+                  },
+                  "subAccountId": {
+                    "type": "string",
+                    "description": "Sub-account ID used by Facebook pages, Instagram business accounts, or LinkedIn"
+                  },
+                  "postDetail": {
+                    "type": "object",
+                    "required": [
+                      "title"
+                    ],
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "description": "Title of the post"
+                      },
+                      "mediaType": {
+                        "type": "string",
+                        "description": "Media type. Supported values depend on the connected platform"
+                      },
+                      "custom": {
+                        "type": "object",
+                        "properties": {
+                          "description": {
+                            "type": "string",
+                            "description": "Description of the post, including hashtags"
+                          },
+                          "privacy": {
+                            "type": "string",
+                            "enum": [
+                              "public",
+                              "private",
+                              "unlisted"
+                            ],
+                            "description": "Privacy setting for YouTube"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully created a post task",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "postId": "17722461986440WKW-FACEBOOK_PAGE"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "postId"
+                      ],
+                      "properties": {
+                        "postId": {
+                          "type": "string",
+                          "description": "Unique ID of the post task"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "social-posting",
+          "enterprise"
+        ]
+      }
+    },
+    "/api/publish-schedules": {
+      "post": {
+        "operationId": "PublishScheduleController_createPublishSchedule",
+        "description": "Schedule a clip to be published later. The `publishAt` value must be a future UTC ISO 8601 timestamp. Each X (formerly Twitter) post costs 1 credit.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "projectId": "P0000000demo",
+                "clipId": "qU3iVMSO77",
+                "postAccountId": "postAccountId_xxx1",
+                "subAccountId": "subAccountId_xxx1",
+                "postDetail": {
+                  "title": "My Daughter's Creepy 3 AM Visitor",
+                  "custom": {
+                    "description": "Okay, so my daughter got a doll that can apparently move on its own. Last night at 3 AM, I heard footsteps, went to check, and this thing had moved! Totally thought I was losing my mind. Anyone else's toys play tricks? #CreepyDoll #HauntedHouse #MomLife #ParentingFails #ScaryStories",
+                    "privacy": "public"
+                  },
+                  "mediaType": "video"
+                },
+                "publishAt": "2026-03-01T16:00:00.000Z"
+              },
+              "schema": {
+                "type": "object",
+                "required": [
+                  "projectId",
+                  "clipId",
+                  "postAccountId",
+                  "postDetail",
+                  "publishAt"
+                ],
+                "properties": {
+                  "projectId": {
+                    "type": "string",
+                    "description": "Project ID"
+                  },
+                  "clipId": {
+                    "type": "string",
+                    "description": "Bare clip ID (e.g. `qU3iVMSO77`). **Not** the composite `{projectId}.{clipId}` form returned as `id` by `GET /api/exportable-clips` — pass only the part after the dot."
+                  },
+                  "postAccountId": {
+                    "type": "string",
+                    "description": "Unique ID of the connected social account record"
+                  },
+                  "subAccountId": {
+                    "type": "string",
+                    "description": "Sub-account ID used by Facebook pages, Instagram business accounts, or LinkedIn"
+                  },
+                  "publishAt": {
+                    "type": "string",
+                    "description": "Future publish time in UTC ISO 8601 format"
+                  },
+                  "postDetail": {
+                    "type": "object",
+                    "required": [
+                      "title"
+                    ],
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "description": "Title of the post"
+                      },
+                      "mediaType": {
+                        "type": "string",
+                        "description": "Media type. Supported values depend on the connected platform"
+                      },
+                      "custom": {
+                        "type": "object",
+                        "properties": {
+                          "description": {
+                            "type": "string",
+                            "description": "Description of the post, including hashtags"
+                          },
+                          "privacy": {
+                            "type": "string",
+                            "enum": [
+                              "public",
+                              "private",
+                              "unlisted"
+                            ],
+                            "description": "Privacy setting for YouTube"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully created a publish schedule",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "scheduleId": "1772177588135sHuZ-FACEBOOK_PAGE"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "scheduleId"
+                      ],
+                      "properties": {
+                        "scheduleId": {
+                          "type": "string",
+                          "description": "Unique ID of the created schedule task"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "social-posting",
+          "enterprise"
+        ]
+      }
+    },
+    "/api/publish-schedules/{scheduleId}": {
+      "delete": {
+        "operationId": "PublishScheduleController_cancelPublishSchedule",
+        "description": "Cancel a scheduled publish task before its publish time.",
+        "parameters": [
+          {
+            "name": "scheduleId",
+            "required": true,
+            "in": "path",
+            "description": "Unique ID of the schedule task to cancel",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully canceled the publish schedule",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {}
+                },
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "description": "Empty object returned on success"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "social-posting",
+          "enterprise"
+        ]
+      }
+    },
+    "/api/generative-jobs": {
+      "post": {
+        "operationId": "GenerativeJobController_createGenerativeJob",
+        "summary": "Create a thumbnail generation job",
+        "description": "Experimental. Subject to change; daily caps apply and the endpoint may be temporarily disabled via a runtime kill switch. Currently the only published `jobType` is `thumbnail` (7 credits/call, charged on success and refunded on failure).",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerativeThumbnailJobRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerativeJobCreateResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "generative-jobs"
+        ]
+      }
+    },
+    "/api/generative-jobs/{jobId}": {
+      "get": {
+        "operationId": "GenerativeJobController_getGenerativeJob",
+        "summary": "Get a generative job",
+        "description": "Experimental. Returns status, progress, and result for a job created via `POST /api/generative-jobs`. For `thumbnail` jobs, the `result.generatedThumbnailUris` array contains the CDN URLs of the produced thumbnails when `status` is `CONCLUDED`.",
+        "parameters": [
+          {
+            "name": "jobId",
+            "required": true,
+            "in": "path",
+            "description": "The jobId returned by `POST /api/generative-jobs`.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerativeJobStatusResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "generative-jobs"
+        ]
+      }
+    },
+    "/api/transcripts": {
+      "get": {
+        "operationId": "TranscriptController_getTranscript",
+        "summary": "Get a source-video transcript",
+        "description": "Fetch the trimmed source-video transcript for a project. ASR internals (seek, tokens, log-probabilities, etc.) are stripped. For API callers on a range-limited project, paragraphs are filtered to the billed curation range; internal callers and full-source submissions get the full transcript.",
+        "parameters": [
+          {
+            "name": "q",
+            "required": true,
+            "in": "query",
+            "description": "Query variant. Public callers must pass `findByProjectId`.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "findByProjectId"
+              ]
+            }
+          },
+          {
+            "name": "projectId",
+            "required": true,
+            "in": "query",
+            "description": "Project ID.",
+            "schema": {
+              "type": "string",
+              "example": "P2120900kDmP"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TranscriptResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "transcripts"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Clip API",
+    "description": "Clip API documentation",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [
+    {
+      "url": "https://api.opus.pro",
+      "description": "OpusClip Open API Production Server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "LayoutAspectRatio": {
+        "type": "string",
+        "enum": [
+          "portrait",
+          "landscape",
+          "square"
+        ]
+      },
+      "StrokeDto": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Indicates if the stroke is enabled.",
+            "example": true
+          },
+          "color": {
+            "type": "string",
+            "description": "The color of the stroke.",
+            "example": "#000000FF"
+          },
+          "width": {
+            "type": "number",
+            "description": "The width of the stroke.",
+            "example": 16
+          }
+        },
+        "required": [
+          "enabled",
+          "color",
+          "width"
+        ]
+      },
+      "ShadowDto": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Indicates if the shadow is enabled.",
+            "example": true
+          },
+          "color": {
+            "type": "string",
+            "description": "The color of the shadow.",
+            "example": "#FFFFFFFF"
+          },
+          "x": {
+            "type": "number",
+            "description": "The x offset of the shadow.",
+            "example": 2
+          },
+          "y": {
+            "type": "number",
+            "description": "The y offset of the shadow.",
+            "example": 2
+          },
+          "blur": {
+            "type": "number",
+            "description": "The blur radius of the shadow.",
+            "example": 16
+          },
+          "useWordHighlightColor": {
+            "type": "boolean",
+            "description": "Indicates if the word highlight color should be used for the shadow.",
+            "example": false
+          }
+        },
+        "required": [
+          "enabled",
+          "color",
+          "x",
+          "y",
+          "blur"
+        ]
+      },
+      "FontDto": {
+        "type": "object",
+        "properties": {
+          "color": {
+            "type": "string",
+            "description": "The color of the font.",
+            "example": "#ffffff"
+          },
+          "style": {
+            "description": "The style of the font.",
+            "example": [
+              "900"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "family": {
+            "type": "string",
+            "description": "The family of the font.",
+            "example": "Komika-axis"
+          },
+          "stroke": {
+            "description": "The stroke settings of the font.",
+            "example": {
+              "enabled": false,
+              "color": "#000000FF",
+              "width": 16
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StrokeDto"
+              }
+            ]
+          },
+          "shadow": {
+            "description": "The shadow settings of the font.",
+            "example": {
+              "enabled": true,
+              "color": "#FFFFFFFF",
+              "x": 2,
+              "y": 2,
+              "blur": 16
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ShadowDto"
+              }
+            ]
+          },
+          "id": {
+            "type": "string",
+            "description": "The ID of the font.",
+            "example": "font123"
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the font.",
+            "example": "CustomizedFont",
+            "enum": [
+              "CustomizedFont",
+              "System"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the font.",
+            "example": "Arial"
+          },
+          "path": {
+            "type": "string",
+            "description": "The storage path of the font.",
+            "example": "/fonts/arial.ttf"
+          },
+          "size": {
+            "type": "string",
+            "description": "The size of the font.",
+            "example": "Large",
+            "enum": [
+              "Large",
+              "Middle",
+              "Small"
+            ]
+          },
+          "numericalSize": {
+            "type": "number",
+            "description": "The numerical size of the font.",
+            "example": 50
+          },
+          "textDecoration": {
+            "type": "string",
+            "description": "The text decoration of the font.",
+            "example": "underline",
+            "enum": [
+              "line-through",
+              "underline",
+              ""
+            ]
+          }
+        },
+        "required": [
+          "color",
+          "style",
+          "family",
+          "stroke",
+          "shadow"
+        ]
+      },
+      "HighlightColorDto": {
+        "type": "object",
+        "properties": {
+          "primary": {
+            "type": "string",
+            "description": "Primary highlight color.",
+            "example": "#ff0000"
+          },
+          "secondary": {
+            "type": "string",
+            "description": "Secondary highlight color.",
+            "example": "#00ff00"
+          }
+        },
+        "required": [
+          "primary",
+          "secondary"
+        ]
+      },
+      "RenderPreferenceDto": {
+        "type": "object",
+        "properties": {
+          "enableAutoLayout": {
+            "type": "boolean",
+            "description": "Enables automatic layout adjustment.",
+            "example": false,
+            "default": false
+          },
+          "enableScreenLayout": {
+            "type": "boolean",
+            "description": "Enables screen layout for the video.",
+            "example": true,
+            "default": false
+          },
+          "enableCrop": {
+            "type": "boolean",
+            "description": "Enables cropping of the video.",
+            "example": true,
+            "default": false
+          },
+          "enableCaption": {
+            "type": "boolean",
+            "description": "Enables caption overlay on the video.",
+            "example": true,
+            "default": false
+          },
+          "enableUppercase": {
+            "type": "boolean",
+            "description": "Converts all characters to uppercase in captions.",
+            "example": true,
+            "default": false
+          },
+          "enableHighlight": {
+            "type": "boolean",
+            "description": "Enables keyword highlighting in captions.",
+            "example": true,
+            "default": false
+          },
+          "enableEmoji": {
+            "type": "boolean",
+            "description": "Enables emoji overlay on the video.",
+            "example": true,
+            "default": false
+          },
+          "enableFillLayout": {
+            "type": "boolean",
+            "description": "Enables fill layout for a single person.",
+            "example": false,
+            "default": false
+          },
+          "enableSplitLayout": {
+            "type": "boolean",
+            "description": "Enables split layout for two people.",
+            "example": true,
+            "default": false
+          },
+          "enableThreeLayout": {
+            "type": "boolean",
+            "description": "Enables layout for three people.",
+            "example": true,
+            "default": false
+          },
+          "enableFourLayout": {
+            "type": "boolean",
+            "description": "Enables layout for four people.",
+            "example": true,
+            "default": false
+          },
+          "enableFitLayout": {
+            "type": "boolean",
+            "description": "Enables fit layout for multiple people.",
+            "example": false,
+            "default": false
+          },
+          "fitLayoutCropRatio": {
+            "type": "string",
+            "description": "Specifies the crop ratio for fit layout.",
+            "example": "4:3",
+            "default": "4:3"
+          },
+          "enableVisualHook": {
+            "type": "boolean",
+            "description": "Enables visual hook overlay, deprecated and should always be false.",
+            "example": false,
+            "default": false
+          },
+          "enableWatermark": {
+            "type": "boolean",
+            "description": "Enables watermark overlay.",
+            "example": false,
+            "default": false
+          },
+          "layoutAspectRatio": {
+            "description": "Specifies the layout aspect ratio.",
+            "example": "portrait",
+            "default": "portrait",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LayoutAspectRatio"
+              }
+            ]
+          },
+          "enableBroll": {
+            "type": "boolean",
+            "description": "Enables B-Roll overlay on the video.",
+            "example": false,
+            "default": false
+          },
+          "font": {
+            "description": "Font settings for captions.",
+            "example": {
+              "color": "#ffffff",
+              "style": [
+                "900"
+              ],
+              "family": "Komika-axis",
+              "stroke": {
+                "enabled": false,
+                "color": "#000000FF",
+                "width": 16
+              },
+              "shadow": {
+                "enabled": true,
+                "color": "#FFFFFFFF",
+                "x": 2,
+                "y": 2,
+                "blur": 16
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FontDto"
+              }
+            ]
+          },
+          "highlightColor": {
+            "description": "Highlight colors for keywords in captions.",
+            "example": {
+              "primary": "#ff0000",
+              "secondary": "#00ff00"
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HighlightColorDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "enableAutoLayout",
+          "enableScreenLayout",
+          "enableCrop",
+          "enableCaption",
+          "enableUppercase",
+          "enableHighlight",
+          "enableEmoji",
+          "enableFillLayout",
+          "enableSplitLayout",
+          "enableThreeLayout",
+          "enableFourLayout",
+          "enableFitLayout",
+          "fitLayoutCropRatio",
+          "enableVisualHook",
+          "enableWatermark",
+          "font",
+          "highlightColor"
+        ]
+      },
+      "BrandTemplateRepresentation": {
+        "type": "object",
+        "properties": {
+          "templateId": {
+            "type": "string",
+            "description": "Template ID",
+            "example": "cm32g2poc0002t5bnhmg2kfyx"
+          },
+          "name": {
+            "type": "string",
+            "description": "Template name",
+            "example": "Karaoke Template"
+          },
+          "isDefault": {
+            "type": "boolean",
+            "description": "Is default template",
+            "example": true
+          },
+          "preferences": {
+            "description": "Render preference",
+            "example": {
+              "enableAutoLayout": false,
+              "enableFillLayout": false,
+              "enableFitLayout": false,
+              "fitLayoutCropRatio": "4:3",
+              "enableSplitLayout": true,
+              "enableThreeLayout": true,
+              "enableFourLayout": true,
+              "enableScreenLayout": true,
+              "enableVisualHook": false,
+              "enableWatermark": false,
+              "enableCrop": true,
+              "enableCaption": true,
+              "enableUppercase": true,
+              "enableHighlight": true,
+              "enableEmoji": true,
+              "font": {
+                "color": "#ffffff",
+                "style": [
+                  "900"
+                ],
+                "family": "Komika-axis",
+                "stroke": {
+                  "enabled": false,
+                  "color": "#000000FF",
+                  "width": 16
+                },
+                "shadow": {
+                  "enabled": true,
+                  "color": "#FFFFFFFF",
+                  "x": 2,
+                  "y": 2,
+                  "blur": 16
+                }
+              },
+              "highlightColor": {
+                "primary": "#04f827",
+                "secondary": "#FFFD03"
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RenderPreferenceDto"
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of template",
+            "example": "PresetOverwrite"
+          }
+        },
+        "required": [
+          "templateId",
+          "name",
+          "isDefault",
+          "preferences"
+        ]
+      },
+      "ConclusionActionDto": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Specifies the action to be taken upon project conclusion. Options include sending an email or triggering a webhook.",
+            "enum": [
+              "EMAIL",
+              "WEBHOOK"
+            ],
+            "example": "EMAIL"
+          },
+          "notifyFailure": {
+            "type": "boolean",
+            "description": "Indicates whether to notify on failure.",
+            "default": false,
+            "example": true
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address to send notifications to, if type is EMAIL.",
+            "example": "user@example.com"
+          },
+          "url": {
+            "type": "string",
+            "description": "Webhook URL to trigger, if type is WEBHOOK.",
+            "example": "https://example.com/webhook"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "CurationRangeDto": {
+        "type": "object",
+        "properties": {
+          "startSec": {
+            "type": "number",
+            "description": "The start time of the range to be curated.",
+            "example": 106
+          },
+          "endSec": {
+            "type": "number",
+            "description": "The end time of the range to be curated.",
+            "example": 204
+          }
+        }
+      },
+      "Genre": {
+        "type": "string",
+        "enum": [
+          "Auto",
+          "Q&A",
+          "Commentary",
+          "Marketing",
+          "Webinar",
+          "Motivational speech",
+          "Podcast",
+          "Academic",
+          "Listicle",
+          "Product reviews",
+          "How-to",
+          "Comedy",
+          "Sports commentary",
+          "Church",
+          "News",
+          "Vlog",
+          "Gaming",
+          "Others"
+        ]
+      },
+      "CurationPreferenceDto": {
+        "type": "object",
+        "properties": {
+          "clipDurations": {
+            "description": "Durations (in seconds) of the clips to be generated. Default value is [0, 90]. Other possible values are: [0, 30], [30, 60], [60, 90], [90, 180].",
+            "example": [
+              [
+                0,
+                30
+              ],
+              [
+                30,
+                60
+              ],
+              [
+                60,
+                90
+              ],
+              [
+                90,
+                180
+              ]
+            ],
+            "default": [],
+            "readOnly": true,
+            "type": "array",
+            "items": {
+              "type": "array"
+            }
+          },
+          "topicKeywords": {
+            "description": "Keywords used to find relevant moments to clip from",
+            "example": [
+              "Fancy Words"
+            ],
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "range": {
+            "description": "The range of the original long-form video to generate clips from.",
+            "example": {
+              "startSec": 106,
+              "endSec": 204
+            },
+            "default": null,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CurationRangeDto"
+              }
+            ]
+          },
+          "genre": {
+            "description": "The genre of the clips, will apply suitable AI curation models to find the best results.",
+            "default": "Auto",
+            "example": "Auto",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Genre"
+              }
+            ]
+          }
+        }
+      },
+      "ImportPreferenceDto": {
+        "type": "object",
+        "properties": {
+          "sourceLang": {
+            "type": "string",
+            "description": "Select the language to detect the video's spoken content, or leave it blank for automatic detection. Using ISO-639 language codes, examples: \"en\" for English, \"de\" for German, \"fr\" for French.",
+            "default": "auto",
+            "example": "en"
+          }
+        }
+      },
+      "CreateClipProjectCommand": {
+        "type": "object",
+        "properties": {
+          "videoUrl": {
+            "type": "string",
+            "description": "This parameter defines the url of the long-form video. OpusClip can import public videos from the following platforms: \n- YouTube, Google Drive, Vimeo, Zoom, Rumble, Twitch, Facebook, LinkedIn, X, Dropbox, Riverside, Loom, Frame.io, StreamYard\n- Any public video s3 link of an mp4 file (up to 10GB per video)",
+            "example": "https://www.youtube.com/watch?v=LXvv6CbGg8A"
+          },
+          "conclusionActions": {
+            "description": "Actions to be taken upon project conclusion, such as sending an email or triggering a webhook.",
+            "example": [
+              {
+                "type": "EMAIL",
+                "notifyFailure": true,
+                "email": "opusclip@opus.pro"
+              }
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConclusionActionDto"
+            }
+          },
+          "curationPref": {
+            "description": "Preferences for advanced curation of the video.",
+            "example": {
+              "range": {
+                "startSec": 28,
+                "endSec": 636
+              },
+              "clipDurations": [
+                [
+                  0,
+                  90
+                ]
+              ],
+              "topicKeywords": [
+                "OpusClip"
+              ],
+              "genre": "Auto",
+              "skipCurate": false
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CurationPreferenceDto"
+              }
+            ]
+          },
+          "importPref": {
+            "description": "Preferences for importing the video, such as source language.",
+            "example": {
+              "sourceLang": "auto"
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ImportPreferenceDto"
+              }
+            ]
+          },
+          "brandTemplateId": {
+            "type": "string",
+            "description": "ID of the brand template to be used for the project.",
+            "example": "preset-fancy-Karaoke",
+            "default": null
+          }
+        },
+        "required": [
+          "videoUrl"
+        ]
+      },
+      "ClipProjectRepresentation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the project.",
+            "example": "P0000000demo"
+          },
+          "userId": {
+            "type": "string",
+            "description": "The unique identifier of the user.",
+            "example": "google-oauth2|100000000000000000001"
+          },
+          "orgId": {
+            "type": "string",
+            "description": "The unique identifier of the organization.",
+            "example": "org_Example00000001"
+          },
+          "isDeleted": {
+            "type": "boolean",
+            "description": "Indicates whether the project is deleted.",
+            "example": false
+          },
+          "isPurged": {
+            "type": "boolean",
+            "description": "Indicates whether the project is purged.",
+            "example": false
+          },
+          "projectId": {
+            "type": "string",
+            "description": "The unique identifier of the project.",
+            "example": "P0000000demo"
+          },
+          "sourcePlatform": {
+            "type": "string",
+            "description": "The platform from which the video is sourced.",
+            "example": "YOUTUBE",
+            "enum": [
+              "YOUTUBE",
+              "UPLOADED",
+              "YTDLP_LINK",
+              "GDRIVE",
+              "ZOOM",
+              "STREAM_YARD"
+            ]
+          },
+          "sourceId": {
+            "type": "string",
+            "description": "The unique identifier for the video on the source platform.",
+            "example": "YT_tEXaoozFRes"
+          },
+          "sourceUri": {
+            "type": "string",
+            "description": "The URI of the source video.",
+            "example": null
+          },
+          "labels": {
+            "description": "Labels associated with the project.",
+            "example": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "productTier": {
+            "type": "string",
+            "description": "The product tier of the project.",
+            "example": "PRO"
+          },
+          "stage": {
+            "type": "string",
+            "description": "The current stage of the project.",
+            "example": "QUEUED",
+            "enum": [
+              "PENDING",
+              "QUEUED",
+              "IMPORT",
+              "CURATE",
+              "REFINE",
+              "RENDER",
+              "UPLOAD",
+              "COMPLETE",
+              "STALLED"
+            ]
+          },
+          "model": {
+            "type": "string",
+            "description": "The AI clipping model used for the project.",
+            "example": "ClipBasic",
+            "enum": [
+              "ClipAnything",
+              "ClipBasic"
+            ]
+          },
+          "error": {
+            "type": "string",
+            "description": "Error message, if any.",
+            "example": null
+          },
+          "stallCount": {
+            "type": "number",
+            "description": "The number of times the project has stalled.",
+            "example": null
+          },
+          "workerUrl": {
+            "type": "string",
+            "description": "The URL of the worker processing the project.",
+            "example": null
+          },
+          "curationPref": {
+            "description": "Preferences for advanced curation of the video.",
+            "example": {
+              "range": {
+                "startSec": 28,
+                "endSec": 636
+              },
+              "clipDurations": [
+                [
+                  0,
+                  90
+                ]
+              ],
+              "topicKeywords": [
+                "OpusClip"
+              ],
+              "genre": "Auto",
+              "skipCurate": false
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CurationPreferenceDto"
+              }
+            ]
+          },
+          "storageSize": {
+            "type": "number",
+            "description": "The total size of the project in bytes.",
+            "example": 0
+          },
+          "storageStatus": {
+            "type": "string",
+            "description": "The storage status of the project.",
+            "example": "TEMPORARY"
+          },
+          "storageExpireAt": {
+            "type": "string",
+            "description": "The expiration date of the project storage.",
+            "example": "2024-12-19T08:17:42.832Z"
+          },
+          "renderPref": {
+            "description": "Preferences for rendering the video, including layout and overlay options.",
+            "example": {
+              "skipReframe": false,
+              "enableSplitLayout": true,
+              "enableFitLayout": false,
+              "enableFillLayout": false,
+              "enableScreenLayout": true,
+              "enableThreeLayout": true,
+              "enableFourLayout": true,
+              "enableGameLayout": null,
+              "enableAutoLayout": false,
+              "disableFitLayout": false,
+              "disableFillLayout": false,
+              "fitLayoutCropRatio": "4:3",
+              "enableCrop": true,
+              "layoutAspectRatio": "portrait",
+              "enableVisualHook": false,
+              "enableCaption": true,
+              "captionStyle": "one-line",
+              "captionPosition": "auto",
+              "enableCaptionAnimation": true,
+              "captionAnimation": {
+                "name": "pop",
+                "highlightColor": "#04f827",
+                "bgColor": ""
+              },
+              "enableHighlight": true,
+              "enableEmoji": true,
+              "emojiStyle": {
+                "pos": null,
+                "scaleX": null,
+                "scaleY": null,
+                "rect": {
+                  "xPct": 0,
+                  "yPct": -0.79,
+                  "wPct": 0.133,
+                  "hPct": 0.075,
+                  "type": "CPct"
+                }
+              },
+              "enableUppercase": true,
+              "highlightColor": {
+                "primary": "#04f827",
+                "secondary": "#FFFD03"
+              },
+              "font": {
+                "id": null,
+                "type": null,
+                "name": null,
+                "path": null,
+                "size": "Large",
+                "numericalSize": 50,
+                "color": "#ffffff",
+                "style": [
+                  "900"
+                ],
+                "textDecoration": "",
+                "family": "Komika-axis",
+                "stroke": {
+                  "enabled": true,
+                  "color": "#000000FF",
+                  "width": 16
+                },
+                "shadow": {
+                  "enabled": true,
+                  "color": "#FFFFFFFF",
+                  "x": 2,
+                  "y": 2,
+                  "blur": 16,
+                  "useWordHighlightColor": false
+                }
+              },
+              "screenOverlay": null,
+              "screenOverlayFileId": null,
+              "screenOverlays": [
+                {
+                  "object": {
+                    "id": null,
+                    "kind": null,
+                    "name": "overlay/org_Example00000001/google-oauth2|100000000000000000001/1731395502191.png",
+                    "displayName": "test.png",
+                    "selfLink": null,
+                    "mediaLink": null,
+                    "bucket": "ext.gcs.opus.pro",
+                    "metageneration": null,
+                    "storageClass": null,
+                    "md5Hash": null,
+                    "etag": null,
+                    "crc32c": null,
+                    "contentType": null,
+                    "size": null,
+                    "updated": null,
+                    "timeCreated": null,
+                    "generation": null,
+                    "timeStorageClassUpdated": null
+                  },
+                  "style": null,
+                  "rect": {
+                    "xPct": 0.5806182121971597,
+                    "yPct": 0.6965845864661654,
+                    "wPct": 0.4193817878028405,
+                    "hPct": 0.3035714285714285,
+                    "type": "CPct"
+                  }
+                }
+              ],
+              "enableBroll": null,
+              "enableScreenOverlay": null,
+              "disableScreenOverlay": null,
+              "enableAutoTransition": true,
+              "selectedTransitions": [
+                "crossFade"
+              ],
+              "enableVoiceEnhancement": null,
+              "enableWatermark": false
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RenderPreferenceDto"
+              }
+            ]
+          },
+          "refundStatus": {
+            "type": "string",
+            "description": "The refund status of the project.",
+            "example": null
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date and time when the project was created.",
+            "example": "2024-11-19T08:17:42.832Z"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date and time when the project was last updated.",
+            "example": "2024-11-19T08:17:42.860Z"
+          },
+          "clusterJobId": {
+            "type": "string",
+            "description": "The unique identifier of the cluster job processing the project.",
+            "example": "FP.P0000000demo:20241119081742853.FP"
+          },
+          "cluster": {
+            "type": "string",
+            "description": "The cluster on which the project is running.",
+            "example": "gold"
+          },
+          "importPref": {
+            "description": "Preferences for importing the video, such as source language.",
+            "example": {
+              "sourceLang": "en"
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ImportPreferenceDto"
+              }
+            ]
+          },
+          "visibility": {
+            "type": "string",
+            "description": "The visibility of the project.",
+            "example": "DEFAULT",
+            "enum": [
+              "DEFAULT",
+              "PUBLIC",
+              "PUBLIC_VIEW"
+            ]
+          },
+          "permissions": {
+            "description": "Permissions associated with the project.",
+            "example": [
+              "PROJECT_SHARE",
+              "PROJECT_EDIT",
+              "PROJECT_VIEW"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "promptRecommendations": {
+            "description": "Recommendations for project prompts.",
+            "example": [
+              "Foo",
+              "Boo"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "userId",
+          "orgId",
+          "isDeleted",
+          "isPurged",
+          "projectId",
+          "sourcePlatform",
+          "sourceId",
+          "labels",
+          "productTier",
+          "stage",
+          "storageSize",
+          "storageStatus",
+          "storageExpireAt",
+          "createdAt",
+          "updatedAt",
+          "clusterJobId",
+          "cluster",
+          "visibility",
+          "permissions",
+          "promptRecommendations"
+        ]
+      },
+      "SuccessResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "UpdateProjectVisibilityCommand": {
+        "type": "object",
+        "properties": {
+          "visibility": {
+            "type": "string",
+            "description": "The visibility of the project. `DEFAULT`: Team members can open, edit and export the project. `PUBLIC`: Anyone can open, edit and export the project.",
+            "example": "PUBLIC",
+            "enum": [
+              "DEFAULT",
+              "PUBLIC"
+            ]
+          }
+        },
+        "required": [
+          "visibility"
+        ]
+      },
+      "ExportableClipRepresentation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Full clip id. Format: `{project_id}.{curation_id}`",
+            "example": "P0000000demo.CUexample1"
+          },
+          "projectId": {
+            "type": "string",
+            "description": "Project ID",
+            "example": "P0000000demo"
+          },
+          "runId": {
+            "type": "string",
+            "description": "Run ID",
+            "example": "20241113071229217.FP"
+          },
+          "curationId": {
+            "type": "string",
+            "description": "Curation ID",
+            "example": "CUexample1"
+          },
+          "orgId": {
+            "type": "string",
+            "description": "Organization ID",
+            "example": "org_Example00000001"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User ID",
+            "example": "google-oauth2|100000000000000000001"
+          },
+          "uriForPreview": {
+            "type": "string",
+            "description": "Google Cloud Storage URI of video for preview",
+            "example": "https://ext.cdn.opus.pro/media/org_Example00000001/google-oauth2|100000000000000000001/P0000000demo/c.CUexample1/esd.mp4?v=1731482302577650"
+          },
+          "uriForExport": {
+            "type": "string",
+            "description": "Google Cloud Storage URI of video for export/download",
+            "example": "https://ext.cdn.opus.pro/media/org_Example00000001/google-oauth2|100000000000000000001/P0000000demo/c.CUexample1/ehd.mp4?v=1731482302564330"
+          },
+          "storageUsed": {
+            "type": "number",
+            "description": "Storage used in bytes",
+            "example": 15537888
+          },
+          "durationMs": {
+            "type": "number",
+            "description": "Duration in milliseconds",
+            "example": 19478
+          },
+          "timeRanges": {
+            "description": "Original time ranges of the clip (in seconds)",
+            "example": [
+              [
+                192170,
+                211630
+              ]
+            ],
+            "items": {
+              "type": "array"
+            },
+            "type": "array"
+          },
+          "keywords": {
+            "description": "Keywords of this clip",
+            "example": [
+              "Q&A"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "promptName": {
+            "type": "string",
+            "description": "Prompt name",
+            "example": "Q&A"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the clip",
+            "example": "Connect Through Passion: The Power of Ensemble Performance"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the clip",
+            "example": "Experience the magic of live performance as our talented cellist captivates the audience with her passionate playing. Witness the seamless coordination of the ensemble in a breathtaking display of musical artistry that will leave you inspired!"
+          },
+          "hashtags": {
+            "type": "string",
+            "description": "Hashtags for the clip",
+            "example": "#ClassicalMusic #CelloPerformance #EnsembleMusic #LiveConcert #MusicPassion #CoordinatedPerformance #MusicalArtistry #Cellist #AudienceEngagement #StageMagic"
+          },
+          "text": {
+            "type": "string",
+            "description": "Text content of the clip",
+            "example": "Clip text content"
+          },
+          "genre": {
+            "type": "string",
+            "description": "Genre of the clip",
+            "example": "Auto"
+          },
+          "subgenre": {
+            "type": "string",
+            "description": "Subgenre of the clip",
+            "example": "general"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Creation date",
+            "example": "2024-11-13T07:18:22.811Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last update date",
+            "example": "2024-11-13T07:18:22.811Z"
+          },
+          "clipCopilotTaskId": {
+            "type": "string",
+            "description": "Clip copilot task ID",
+            "example": "taskid"
+          },
+          "productTier": {
+            "type": "string",
+            "description": "Product tier",
+            "example": "PRO"
+          },
+          "renderPref": {
+            "description": "Render preference",
+            "example": {
+              "enableAutoLayout": false,
+              "enableFillLayout": false,
+              "enableFitLayout": false,
+              "fitLayoutCropRatio": "4:3",
+              "enableSplitLayout": true,
+              "enableThreeLayout": true,
+              "enableFourLayout": true,
+              "enableScreenLayout": true,
+              "enableVisualHook": false,
+              "enableWatermark": false,
+              "enableCrop": true,
+              "enableCaption": true,
+              "enableUppercase": true,
+              "enableHighlight": true,
+              "enableEmoji": true,
+              "font": {
+                "color": "#ffffff",
+                "style": [
+                  "900"
+                ],
+                "family": "Komika-axis",
+                "stroke": {
+                  "enabled": false,
+                  "color": "#000000FF",
+                  "width": 16
+                },
+                "shadow": {
+                  "enabled": true,
+                  "color": "#FFFFFFFF",
+                  "x": 2,
+                  "y": 2,
+                  "blur": 16
+                }
+              },
+              "highlightColor": {
+                "primary": "#04f827",
+                "secondary": "#FFFD03"
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RenderPreferenceDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "projectId",
+          "runId",
+          "curationId",
+          "orgId",
+          "userId",
+          "storageUsed",
+          "durationMs",
+          "title",
+          "text",
+          "createdAt",
+          "updatedAt",
+          "productTier",
+          "renderPref"
+        ]
+      },
+      "DeleteCollectionContentCmd": {
+        "type": "object",
+        "properties": {
+          "q": {
+            "type": "string",
+            "description": "**Query type**\n `findByCollectionIdAndContentId` is the only valid value, means delete relation by collectionId + contentId",
+            "enum": [
+              "findByCollectionIdAndContentId"
+            ]
+          },
+          "collectionId": {
+            "type": "string",
+            "description": "The collectionID of the collection that you want to remove the clip from.",
+            "example": "xmAwhhFi0IJt"
+          },
+          "contentId": {
+            "type": "string",
+            "description": "The ID of the clip that you want to remove from the collection. FullClipId: {projectId}.{curationId}",
+            "example": "P0000000demo.CUexample2"
+          }
+        },
+        "required": [
+          "q",
+          "collectionId",
+          "contentId"
+        ]
+      },
+      "CollectionContentDto": {
+        "type": "object",
+        "properties": {
+          "collectionId": {
+            "type": "string",
+            "description": "The collectionID of the collection that the clip was added to.",
+            "example": "xmAwhhFi0IJt"
+          },
+          "contentId": {
+            "type": "string",
+            "description": "The ID of the clip that has been added to the collection. FullClipId: {projectId}.{curationId}",
+            "example": "P0000000demo.CUexample2"
+          }
+        },
+        "required": [
+          "collectionId",
+          "contentId"
+        ]
+      },
+      "CreateCollectionContentCmd": {
+        "type": "object",
+        "properties": {
+          "collectionId": {
+            "type": "string",
+            "description": "The collectionID of the collection that you want to add the clip to.",
+            "example": "xmAwhhFi0IJt"
+          },
+          "contentId": {
+            "type": "string",
+            "description": "The ID of the clip that you want to add to the collection. FullClipId: {projectId}.{curationId}",
+            "example": "P0000000demo.CUexample2"
+          }
+        },
+        "required": [
+          "collectionId",
+          "contentId"
+        ]
+      },
+      "CollectionDto": {
+        "type": "object",
+        "properties": {
+          "collectionId": {
+            "type": "string",
+            "description": "The unique collection ID.",
+            "example": "xmAwhhFi0IJt"
+          },
+          "collectionName": {
+            "type": "string",
+            "description": "The name of the collection that you have created.",
+            "example": "Opus demo clips"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date and time the collection was created."
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date and time the collection was updated."
+          }
+        },
+        "required": [
+          "collectionId",
+          "collectionName"
+        ]
+      },
+      "CreateCollectionCmd": {
+        "type": "object",
+        "properties": {
+          "collectionName": {
+            "type": "string",
+            "description": "The name of the collection that you want to create.",
+            "example": "Opus demo clips"
+          }
+        },
+        "required": [
+          "collectionName"
+        ]
+      },
+      "ContentExportedDto": {
+        "type": "object",
+        "properties": {
+          "contentId": {
+            "type": "string",
+            "description": "Content ID",
+            "example": "P0000000demo.CUexample2"
+          },
+          "uriForExport": {
+            "type": "string",
+            "description": "Export url",
+            "example": "https://ext.cdn.opus.pro/media/org_Example00000001/google-oauth2|100000000000000000001/P0000000demo/c.CUexample3/VIDEO_FILE.mp4?v=1745586132350436"
+          }
+        },
+        "required": [
+          "contentId",
+          "uriForExport"
+        ]
+      },
+      "CollectionExportedDto": {
+        "type": "object",
+        "properties": {
+          "contentList": {
+            "description": "A list of download links for all the clips in that collection.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentExportedDto"
+            }
+          }
+        },
+        "required": [
+          "contentList"
+        ]
+      },
+      "EmptyDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "CensorJobOptions": {
+        "type": "object",
+        "properties": {
+          "beepSound": {
+            "type": "boolean",
+            "description": "Use beep sound instead of the censored words.",
+            "example": true
+          }
+        }
+      },
+      "CensorJobRequest": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The project id that you want to censor.",
+            "example": "P0000000demo"
+          },
+          "clipId": {
+            "type": "string",
+            "description": "The clip id that you want to censor.",
+            "example": "lDIOHRzdac"
+          },
+          "options": {
+            "description": "Some options for the censor job.",
+            "example": {
+              "beepSound": false
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CensorJobOptions"
+              }
+            ]
+          }
+        },
+        "required": [
+          "projectId",
+          "clipId"
+        ]
+      },
+      "CensorJobResponse": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "description": "If the job was created successfully, this will contain the job ID."
+          },
+          "message": {
+            "type": "string",
+            "description": "A message indicating the result of the job creation."
+          }
+        }
+      },
+      "CensorJobStatusResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "CONCLUDED",
+              "FAILED",
+              "PROCESSING",
+              "QUEUED",
+              "UNKNOWN"
+            ],
+            "description": "The status of the censor job."
+          },
+          "error": {
+            "type": "string",
+            "description": "Error message."
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "BrandTemplateController_getTemplates": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/BrandTemplateRepresentation"
+        }
+      },
+      "ClipProjectController_createClipProject": {
+        "$ref": "#/components/schemas/ClipProjectRepresentation"
+      },
+      "ClipProjectController_getClipProjectDetail": {
+        "$ref": "#/components/schemas/ClipProjectRepresentation"
+      },
+      "ClipProjectController_updateClipProjectVisibility": {
+        "$ref": "#/components/schemas/ClipProjectRepresentation"
+      },
+      "ExportableClipController_queryExportableClips": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ExportableClipRepresentation"
+        }
+      },
+      "CollectionContentController_deleteCollectionContents": {
+        "allOf": [
+          {
+            "properties": {
+              "data": {
+                "type": "string",
+                "description": "Show action execute status",
+                "nullable": false,
+                "example": "success"
+              }
+            }
+          }
+        ]
+      },
+      "CollectionContentController_createCollectionContent": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SuccessResponse"
+          },
+          {
+            "properties": {
+              "data": {
+                "$ref": "#/components/schemas/CollectionContentDto"
+              }
+            }
+          }
+        ]
+      },
+      "CollectionController_delete": {
+        "allOf": [
+          {
+            "properties": {
+              "data": {
+                "type": "string",
+                "description": "ID of collection deleted successfully",
+                "nullable": false,
+                "example": "xmAwhhFi0IJt"
+              }
+            }
+          }
+        ]
+      },
+      "CollectionController_create": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SuccessResponse"
+          },
+          {
+            "properties": {
+              "data": {
+                "$ref": "#/components/schemas/CollectionDto"
+              }
+            }
+          }
+        ]
+      },
+      "CollectionController_list": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SuccessResponse"
+          },
+          {
+            "properties": {
+              "data": {
+                "properties": {
+                  "list": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CollectionDto"
+                    },
+                    "description": "The list of collections"
+                  },
+                  "total": {
+                    "type": "number",
+                    "nullable": false,
+                    "description": "Total number of valid items"
+                  },
+                  "next": {
+                    "oneOf": [
+                      {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Next page cursor"
+                      },
+                      {
+                        "type": "number",
+                        "nullable": true,
+                        "description": "Next page cursor"
+                      }
+                    ]
+                  },
+                  "limit": {
+                    "type": "number",
+                    "nullable": true,
+                    "description": "Limit number in this paged query"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "CollectionController_export": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SuccessResponse"
+          },
+          {
+            "properties": {
+              "data": {
+                "$ref": "#/components/schemas/CollectionExportedDto"
+              }
+            }
+          }
+        ]
+      },
+      "CensorJobController_createCensorJob": {
+        "$ref": "#/components/schemas/CensorJobResponse"
+      },
+      "CensorJobController_getCensorJob": {
+        "$ref": "#/components/schemas/CensorJobStatusResponse"
+      },
+      "GenerativeThumbnailJobRequest": {
+        "type": "object",
+        "properties": {
+          "jobType": {
+            "type": "string",
+            "enum": [
+              "thumbnail"
+            ],
+            "description": "The type of generative job to create. Currently the only published value is `thumbnail`."
+          },
+          "sourceUri": {
+            "type": "string",
+            "description": "URL of the source video to extract thumbnails from.",
+            "example": "https://youtube.com/watch?v=..."
+          },
+          "referenceImageUri": {
+            "type": "string",
+            "description": "Optional reference image URL. The thumbnail composition draws stylistic cues from this image. Upload via `POST /api/upload-links` with `usecase: 'FreeToolMedia'`, then pass the returned `cdnUrl` here.",
+            "example": "https://cdn.opus.pro/uploads/.../ref.png"
+          },
+          "maskImageUri": {
+            "type": "string",
+            "description": "Optional mask image URL for inpainting.",
+            "example": "https://cdn.opus.pro/uploads/.../mask.png"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Optional text prompt steering the thumbnail composition.",
+            "example": "punchy red overlay, bold sans-serif title"
+          }
+        },
+        "required": [
+          "jobType",
+          "sourceUri"
+        ]
+      },
+      "GenerativeJobCreateResponse": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "description": "The generated job ID. Use it with `GET /api/generative-jobs/{jobId}` to poll status and fetch results.",
+            "example": "thumbnail-aB3xR7nQ8z"
+          }
+        },
+        "required": [
+          "jobId"
+        ]
+      },
+      "GenerativeJobStatusResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "QUEUED",
+              "PROCESSING",
+              "CONCLUDED",
+              "FAILED",
+              "UNKNOWN"
+            ],
+            "description": "The job status."
+          },
+          "result": {
+            "$ref": "#/components/schemas/GenerativeJobResult",
+            "description": "Present when `status` is `CONCLUDED` and the job produced output."
+          },
+          "progress": {
+            "$ref": "#/components/schemas/GenerativeJobProgress",
+            "description": "Present while the job is `QUEUED` or `PROCESSING`, and on `CONCLUDED` as a final snapshot."
+          },
+          "error": {
+            "$ref": "#/components/schemas/GenerativeJobError",
+            "description": "Present when `status` is `FAILED` or when result extraction failed for a `CONCLUDED` job."
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "GenerativeJobResult": {
+        "type": "object",
+        "description": "Result payload. For `thumbnail` jobs, includes `generatedThumbnailUris`.",
+        "properties": {
+          "generatedThumbnailUris": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "CDN URLs of the produced thumbnails. Typically 4 images per successful thumbnail job."
+          }
+        }
+      },
+      "GenerativeJobProgress": {
+        "type": "object",
+        "description": "Progress snapshot for an in-flight or completed generative job.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "QUEUED",
+              "PROCESSING",
+              "CONCLUDED",
+              "FAILED",
+              "UNKNOWN"
+            ]
+          },
+          "percentage": {
+            "type": "number",
+            "description": "Coarse progress between 0 and 1.",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      },
+      "GenerativeJobError": {
+        "type": "object",
+        "description": "User-facing error info for a failed generative job.",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Error type identifier."
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable error message."
+          }
+        }
+      },
+      "TranscriptResponse": {
+        "type": "object",
+        "description": "Wrapper for the transcript response. `data[0]` is the transcript, or `null` when the project has no transcript yet.",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "nullable": true,
+              "items": {
+                "$ref": "#/components/schemas/TranscriptExportParagraph"
+              }
+            }
+          }
+        }
+      },
+      "TranscriptExportParagraph": {
+        "type": "object",
+        "description": "A paragraph of the transcript with timing and optional speaker attribution.",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Paragraph index within the transcript.",
+            "example": 0
+          },
+          "start": {
+            "type": "number",
+            "description": "Start time in seconds.",
+            "example": 0
+          },
+          "end": {
+            "type": "number",
+            "description": "End time in seconds.",
+            "example": 10.5
+          },
+          "text": {
+            "type": "string",
+            "description": "Paragraph text.",
+            "example": "Hello and welcome to the show."
+          },
+          "speaker": {
+            "type": "string",
+            "description": "Speaker label, when diarization is available.",
+            "example": "SPEAKER_00"
+          },
+          "words": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TranscriptExportWord"
+            },
+            "description": "Per-word timings inside this paragraph."
+          }
+        },
+        "required": [
+          "id",
+          "start",
+          "end",
+          "text",
+          "words"
+        ]
+      },
+      "TranscriptExportWord": {
+        "type": "object",
+        "description": "A single word with start/end timings and optional filler-word flag.",
+        "properties": {
+          "word": {
+            "type": "string",
+            "description": "The word.",
+            "example": "hello"
+          },
+          "start": {
+            "type": "number",
+            "description": "Start time in seconds.",
+            "example": 0.12
+          },
+          "end": {
+            "type": "number",
+            "description": "End time in seconds.",
+            "example": 0.48
+          },
+          "isFillerWord": {
+            "type": "boolean",
+            "description": "True if the word is a filler (um, uh, ...).",
+            "example": false
+          }
+        },
+        "required": [
+          "word",
+          "start",
+          "end"
+        ]
+      }
+    }
+  }
+}

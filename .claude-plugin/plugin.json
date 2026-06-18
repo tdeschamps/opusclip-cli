@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "opusclip-cli",
+  "displayName": "OpusClip CLI",
+  "version": "0.1.0",
+  "description": "Helps agents drive the opusclip CLI efficiently: the create→watch→download clip flow, --wait/--exit-status semantics, stage stepper, and --json/--jq idioms.",
+  "author": {
+    "name": "Thomas Deschamps"
+  },
+  "homepage": "https://github.com/tdeschamps/opusclip-cli",
+  "repository": "https://github.com/tdeschamps/opusclip-cli",
+  "license": "MIT",
+  "keywords": ["opusclip", "video", "clips", "cli", "shorts"],
+  "skills": "./.claude/skills/opusclip-cli/"
+}
