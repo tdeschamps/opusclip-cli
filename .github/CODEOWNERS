@@ -1,0 +1,3 @@
+# Default owner for everything in the repo. Used for review auto-assignment
+# and (when the branch ruleset requires code-owner review) merge gating.
+* @tdeschamps
